@@ -14,7 +14,7 @@ namespace MagicSquare.Test
 
             var magicSquare = new int[][]
             {
-                new int[3] {8, 1, 6},
+                new int[3] { 8, 1, 6 },
                 new int[3] { 3, 5, 7 },
                 new int[3] { 4, 9, 2 }
             };
@@ -38,7 +38,7 @@ namespace MagicSquare.Test
 
             var magicSquare = new int[][]
             {
-                new int[3] {8, 1, 6},
+                new int[3] { 8, 1, 6 },
                 new int[3] { 3, 5, 7 },
                 new int[3] { 4, 9, 2 }
             };
