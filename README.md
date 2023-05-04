@@ -54,3 +54,113 @@ Inputs will always consist of:
 n x n array, where 2 < n < 10
 all array cells will be filled with integers
 gap will be always a positive integer
+
+----------------------------------------------------------------
+
+Solutions
+
+
+int n = square.Length;
+        int x = square[0].Sum();
+        if (!(square.Select(row => row.Sum()).All(s => s == x)
+            && Enumerable.Range(0, n).Select(i => square.Select(row => row[i]).Sum()).All(s => s == x)
+            && (Enumerable.Range(0, n).Select(i => square[i][i]).Sum() == x)
+            && (Enumerable.Range(0, n).Select(i => square[n - i - 1][i]).Sum() == x)
+        ))
+        {
+            return false;
+        }
+        List<int> elements = square.SelectMany(row => row).OrderBy(s => s).ToList();
+        return elements.Zip(elements.Skip(1)).All(t => t.Second - t.First == gap);
+
+------------
+var x = square[0].Sum();
+      var full = new List<int>();
+
+      if(x != square[1].Sum() || x != square[2].Sum()) return false;
+      if(x != square[0][0] + square[1][1] + square[2][2] || x!= square[0][2] + square[1][1] + square[2][0]) return false;
+      for(int i = 0; i <3; i++)
+      {
+        full.Add(square[0][i]);
+        full.Add(square[1][i]);
+        full.Add(square[2][i]);
+        if(x!= square[0][i]+square[1][i]+square[2][i]) return false;
+      }
+      full.Sort();
+      int che = full[0];
+      for(int i = 1; i<9; i++)
+      {
+        che += gap;
+        if(full[i] != che) return false;
+      }
+      
+        return true;
+-------------
+
+      int n = square.GetLength(0);
+      int sum = 0;
+      int testSumRow = 0;
+      int testSumCol = 0;
+      int testSumDiagLeft = 0;
+      int testSumDiagRight = 0;
+      int[] singleArray = new int[n*n];
+      int singleArrayIndex = 0;
+      int testGap = 0;
+      
+      //Sum of rows and cols and diagonals
+      for (int row = 0; row < n; row++)
+      {
+        testSumRow = 0;
+        testSumCol = 0;
+        
+        for (int col = 0; col < n; col++)
+        {
+          //Assign values to single dim array
+          singleArray[singleArrayIndex++] = square[row][col];
+          testSumRow += square[row][col];
+          testSumCol += square[col][row];
+          if (row == col)
+          {
+            testSumDiagLeft += square[row][col];
+          }
+          if ((row + col) == (n - 1))
+          {
+            testSumDiagRight += square[row][col];;
+          }
+        }
+        //assign an initial sum and check if all sums are the same to initial value
+        if (row == 0)
+        {
+            sum = testSumRow;
+        }
+        if (testSumRow != sum || testSumCol != sum)
+        {
+            return false;
+        }
+      }
+      
+      //Check both diagonals
+      if (testSumDiagLeft != sum || testSumDiagRight != sum)
+      {
+        return false;
+      }
+      
+      Array.Sort(singleArray);
+      //duplicates
+      if (singleArray.Length != singleArray.Distinct().Count())
+      {
+        return false;
+      }
+      
+      //check gap
+      for (int index = 1; index < singleArray.Length; index++)
+      {
+        testGap = singleArray[index] - singleArray[index - 1];
+        if (testGap != gap)
+        {
+          return false;
+        }
+      }
+      
+      return true;
+

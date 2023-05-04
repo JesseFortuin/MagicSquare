@@ -1,3 +1,5 @@
+using MagicSquare.BL;
+
 namespace MagicSquare.Test
 {
     public class MagicSquareValidatorTest
@@ -10,11 +12,11 @@ namespace MagicSquare.Test
 
             int gap = 1;
 
-            var magicSquare = new int[,]
+            var magicSquare = new int[][]
             {
-                {8, 1, 6},
-                {3, 5, 7},
-                {4, 9, 2}
+                new int[3] { 8, 1, 6 },
+                new int[3] { 3, 5, 7 },
+                new int[3] { 4, 9, 2 }
             };
 
             bool expected = true;
@@ -34,11 +36,11 @@ namespace MagicSquare.Test
 
             int gap = 2;
 
-            var magicSquare = new int[,]
+            var magicSquare = new int[][]
             {
-                {8, 1, 6},
-                {3, 5, 7},
-                {4, 9, 2}
+                new int[3] { 8, 1, 6 },
+                new int[3] { 3, 5, 7 },
+                new int[3] { 4, 9, 2 }
             };
 
             bool expected = false;
@@ -58,11 +60,11 @@ namespace MagicSquare.Test
 
             int gap = 0;
 
-            var magicSquare = new int[,]
+            var magicSquare = new int[][]
             {
-                {8, 1, 6},
-                {3, 5, 7},
-                {4, 8, 2}
+                new int[3] { 8, 1, 6 },
+                new int[3] { 3, 5, 7 },
+                new int[3] { 4, 8, 2 }
             };
 
             bool expected = false;
@@ -81,11 +83,11 @@ namespace MagicSquare.Test
 
             int gap = 1;
 
-            var magicSquare = new int[,]
+            var magicSquare = new int[][]
             {
-                {8, 1, 6},
-                {3, 5, 7},
-                {4, 9, 20}
+                new int[3] { 8, 1, 6 },
+                new int[3] { 3, 5, 7 },
+                new int[3] { 4, 9, 20 }
             };
 
             bool expected = false;
